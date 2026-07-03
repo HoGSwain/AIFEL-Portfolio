@@ -14,7 +14,7 @@ construction, risk, fixed income, options, and credit.
 
 | # | Project | Scope | Status |
 |---|---------|-------|--------|
-| 1 | [**Financial Market Data Engine**](https://github.com/HoGSwain/financial-market-data-engine) | Acquire → validate → clean → engineer features → store → report for market data. The data foundation every later project imports. | ✅ **Live** |
+| 1 | [**Financial Market Data Engine**](https://github.com/HoGSwain/financial-market-data-engine) | Acquire → validate → clean → engineer features → store → report for market data. The data foundation every later project imports. | ✅ **Live** · [![CI](https://github.com/HoGSwain/financial-market-data-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/financial-market-data-engine/actions/workflows/ci.yml) |
 | 2 | Portfolio Analytics | Returns, risk/return metrics, correlation and performance analytics on multi-asset portfolios, built on the FMDE data layer. | 🔜 Planned |
 | 3 | Portfolio Optimization | Mean-variance / efficient-frontier allocation and related optimization methods. | 🔜 Planned |
 | 4 | Risk Analytics | Value-at-Risk, Expected Shortfall, and scenario/stress risk measures. | 🔜 Planned |
@@ -32,7 +32,7 @@ results stay reproducible across the whole portfolio.
 - Six-stage pipeline: acquisition → validation → cleaning → feature engineering → storage → reporting
 - Pluggable providers (live Yahoo Finance + an offline, deterministic synthetic source)
 - CSV / Parquet / SQLite outputs with JSON metadata (checksum, row count, versions)
-- Python library **and** Typer CLI; 27 passing `pytest` tests
+- Python library **and** Typer CLI; 27 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
 
 ## Tech stack
 
