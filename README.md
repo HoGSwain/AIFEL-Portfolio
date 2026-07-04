@@ -53,7 +53,36 @@ aligned returns and metrics and adds only the optimization layer.
 
 - Mean-variance (Markowitz): minimum-variance and maximum-Sharpe (tangency) portfolios and the efficient frontier
 - Closed-form solutions (shorting) + scipy SLSQP (long-only); ex-ante figures cross-checked against Project 2's ex-post metrics
-- Python library **and** Typer CLI; 35 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
+- Python library **and** Typer CLI; 38 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
+
+## Explainability & Governance
+
+Every project answers a **sixth mandatory question** beyond the usual five —
+*"Can you explain every financial conclusion the system reaches?"* —
+and treats explainability (*understanding*) and governance (*accountability*) as
+first-class, **per-project** deliverables. This index is the thin rollup, not a
+second copy.
+
+Each live project provides:
+
+- A deterministic **`explain()`** that turns its numeric outputs into
+  plain-language findings **and** an explicit limitations list, appended to every
+  report and generated from the actual numbers — **never** by a language model
+  (an LLM narrating a model's output would itself be an unauditable black box).
+- A **`docs/explainability.md`** with the checklist below.
+- **Pinned** cross-project git dependencies (commit SHAs) — reproducible *in
+  fact*, not just in principle.
+
+### Checklist template (each project's `docs/explainability.md`)
+
+**Explainability** — problem defined · concepts in plain language · assumptions
+documented · parameters justified · outputs interpreted for a human · limitations
+disclosed · alternatives discussed.
+
+**Governance** — data provenance recorded · versions tagged · dependencies
+declared **and pinned** · tests pass in CI · validated against known values ·
+reproduction steps complete · fairness/bias assessment (mandatory once a model
+affects people; **N/A** for the current financial-engineering projects).
 
 ## Tech stack
 
