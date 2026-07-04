@@ -34,6 +34,17 @@ results stay reproducible across the whole portfolio.
 - CSV / Parquet / SQLite outputs with JSON metadata (checksum, row count, versions)
 - Python library **and** Typer CLI; 27 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
 
+## Project 2: Portfolio Analytics Engine
+
+Built directly on Project 1, the **Portfolio Analytics Engine (`pae`)** turns
+cleaned returns into performance and risk metrics. It imports
+`fmde.pipeline.run_pipeline` and re-implements no acquisition, validation, or
+cleaning of its own.
+
+- Metrics: annualized return & volatility, Sharpe, Sortino, maximum drawdown, CAPM beta, Jensen's alpha
+- Every formula documented (`docs/methodology.md`) and validated against textbook values / mathematical invariants
+- Python library **and** Typer CLI; 39 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
+
 ## Tech stack
 
 Python 3.10+ · pandas · numpy · pyarrow · Typer · loguru · pytest · ruff · black
