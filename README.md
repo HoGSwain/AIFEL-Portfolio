@@ -11,6 +11,8 @@ fixed income, options, and credit.
 > significant design decision documented and justified; deterministic, offline
 > reproducibility wherever possible; and real automated tests, not just notebooks.
 
+> 📖 **New here, or not from a finance background?** Start with **[Interpreting the Results — in Plain English](docs/interpreting-the-results.md)** — what the toolkit's live-data output actually means, translated for anyone, with the honest caveats up front. *(An interactive visual version is also available on request.)*
+
 ## Projects
 
 | # | Project | Scope | Status |
