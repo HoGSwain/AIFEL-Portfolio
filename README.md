@@ -19,7 +19,7 @@ construction, risk, fixed income, options, and credit.
 | 3 | [**Portfolio Optimization Engine**](https://github.com/HoGSwain/portfolio-optimization-engine) | Minimum-variance and maximum-Sharpe (tangency) portfolios and the efficient frontier (mean-variance / Markowitz) — built on Projects 1–2. | ✅ **Live** · [![CI](https://github.com/HoGSwain/portfolio-optimization-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/portfolio-optimization-engine/actions/workflows/ci.yml) |
 | 4 | [**Risk Analytics Engine**](https://github.com/HoGSwain/risk-analytics-engine) | Value-at-Risk (historical & parametric), Expected Shortfall (CVaR), and stress losses for assets and portfolios — built on Projects 1–2. | ✅ **Live** · [![CI](https://github.com/HoGSwain/risk-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/risk-analytics-engine/actions/workflows/ci.yml) |
 | 5 | [**Bond Analytics Engine**](https://github.com/HoGSwain/bond-analytics-engine) | Bond pricing (price↔yield), duration, convexity, DV01, and a spot yield curve. **Standalone** — the fixed-income primitive. | ✅ **Live** · [![CI](https://github.com/HoGSwain/bond-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/bond-analytics-engine/actions/workflows/ci.yml) |
-| 6 | Option Pricing | Black–Scholes and numerical (binomial / Monte-Carlo) pricing and Greeks. | 🔜 Planned |
+| 6 | [**Option Pricing Engine**](https://github.com/HoGSwain/option-pricing-engine) | Black–Scholes, binomial, and Monte-Carlo option pricing with the full Greeks, implied volatility, and deterministic explainability — composed with Projects 1–2 (spot from `fmde`, realized vol from `pae`). | ✅ **Live** · [![CI](https://github.com/HoGSwain/option-pricing-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/option-pricing-engine/actions/workflows/ci.yml) |
 | 7 | Credit Risk | Default probability, credit scoring, and credit-portfolio risk modeling. | 🔜 Planned |
 
 ## Foundation: Project 1
@@ -75,6 +75,18 @@ dependency. Knowing when *not* to couple is itself an engineering decision.
 - Pricing (price↔yield via Brent), Macaulay & modified duration, convexity, DV01, and a duration+convexity yield-shock scenario vs full reprice
 - A synthetic spot yield curve; every measure validated against a finite-difference oracle (independent of the analytic formulas)
 - Python library **and** Typer CLI; 36 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
+
+## Project 6: Option Pricing Engine
+
+The portfolio's **derivatives** primitive. An option is written *on an equity*, so
+unlike the standalone bond engine the **Option Pricing Engine (`ope`)** genuinely
+**composes** with Projects 1–2: it sources the spot from `fmde` and a realized-
+volatility estimate by reusing `pae`'s metric, while the pure option math still
+runs offline from explicit inputs.
+
+- Three independent pricers — Black–Scholes (closed form), a Cox-Ross-Rubinstein binomial tree (European + American), and seeded Monte-Carlo with a standard error — cross-checked against each other
+- The full Greeks (delta, gamma, vega, theta, rho) validated against a finite-difference oracle, plus implied volatility via Brent; deterministic explanation with the realized≠implied-vol caveat
+- Python library **and** Typer CLI; 41 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
 
 ## Explainability & Governance
 
