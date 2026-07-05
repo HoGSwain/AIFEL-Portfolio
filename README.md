@@ -1,10 +1,11 @@
 # AIFEL — AI-Augmented Financial Engineering Laboratory
 
-A 7-project portfolio building a coherent, **reproducible** quantitative-finance
-stack in Python. Each project is an independent, tested library + CLI, and later
-projects build directly on earlier ones instead of re-implementing shared logic —
-starting from a rigorous data foundation and working up through portfolio
-construction, risk, fixed income, options, and credit.
+A **complete** 7-project portfolio building a coherent, **reproducible**
+quantitative-finance stack in Python — **all 7 projects are live and CI-green**.
+Each project is an independent, tested library + CLI, and later projects build
+directly on earlier ones instead of re-implementing shared logic — starting from a
+rigorous data foundation and working up through portfolio construction, risk,
+fixed income, options, and credit.
 
 > **Design philosophy:** one standardized, tested pipeline per concern; every
 > significant design decision documented and justified; deterministic, offline
@@ -20,7 +21,7 @@ construction, risk, fixed income, options, and credit.
 | 4 | [**Risk Analytics Engine**](https://github.com/HoGSwain/risk-analytics-engine) | Value-at-Risk (historical & parametric), Expected Shortfall (CVaR), and stress losses for assets and portfolios — built on Projects 1–2. | ✅ **Live** · [![CI](https://github.com/HoGSwain/risk-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/risk-analytics-engine/actions/workflows/ci.yml) |
 | 5 | [**Bond Analytics Engine**](https://github.com/HoGSwain/bond-analytics-engine) | Bond pricing (price↔yield), duration, convexity, DV01, and a spot yield curve. **Standalone** — the fixed-income primitive. | ✅ **Live** · [![CI](https://github.com/HoGSwain/bond-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/bond-analytics-engine/actions/workflows/ci.yml) |
 | 6 | [**Option Pricing Engine**](https://github.com/HoGSwain/option-pricing-engine) | Black–Scholes, binomial, and Monte-Carlo option pricing with the full Greeks, implied volatility, and deterministic explainability — composed with Projects 1–2 (spot from `fmde`, realized vol from `pae`). | ✅ **Live** · [![CI](https://github.com/HoGSwain/option-pricing-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/option-pricing-engine/actions/workflows/ci.yml) |
-| 7 | Credit Risk | Default probability, credit scoring, and credit-portfolio risk modeling. | 🔜 Planned |
+| 7 | [**Credit Risk Engine**](https://github.com/HoGSwain/credit-risk-engine) | Structural (Merton) default probability & distance-to-default — equity as an option on firm assets — plus reduced-form portfolio expected loss and Vasicek/Basel credit VaR. The capstone: composes Projects 1, 2 & 6. | ✅ **Live** · [![CI](https://github.com/HoGSwain/credit-risk-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/credit-risk-engine/actions/workflows/ci.yml) |
 
 ## Foundation: Project 1
 
@@ -86,6 +87,18 @@ runs offline from explicit inputs.
 
 - Three independent pricers — Black–Scholes (closed form), a Cox-Ross-Rubinstein binomial tree (European + American), and seeded Monte-Carlo with a standard error — cross-checked against each other
 - The full Greeks (delta, gamma, vega, theta, rho) validated against a finite-difference oracle, plus implied volatility via Brent; deterministic explanation with the realized≠implied-vol caveat
+- Python library **and** Typer CLI; 41 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
+
+## Project 7: Credit Risk Engine
+
+The portfolio's **credit** primitive, and its **capstone**. In the structural
+(Merton) view a firm's equity is a *call option on its assets*, so the **Credit
+Risk Engine (`cre`)** ties everything together: it reuses Project 6's
+Black-Scholes, sources the equity value from Project 1 (`fmde`) and the equity
+volatility from Project 2 (`pae`), and turns them into the language of credit.
+
+- Structural: from observed equity `(E, σ_E)` and debt, solve for the firm's assets `(V, σ_V)` (in log-space for positivity), then distance-to-default, `PD = N(−d₂)`, and the credit spread — validated against Hull (V≈12.40, PD≈12.7%) and a round-trip oracle
+- Reduced-form: portfolio expected loss `Σ PD·LGD·EAD` and single-factor Vasicek/Basel **credit VaR**; PD is risk-neutral (not real-world), stated in every explanation
 - Python library **and** Typer CLI; 41 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
 
 ## Explainability & Governance
