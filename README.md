@@ -13,6 +13,8 @@ fixed income, options, and credit.
 
 > 📖 **New here, or not from a finance background?** Start with **[Interpreting the Results — in Plain English](docs/interpreting-the-results.md)** — what the toolkit's live-data output actually means, translated for anyone, with the honest caveats up front. *(An interactive visual version is also available on request.)*
 
+> 🧪 **A note on data.** By default the engines run on **synthetic** (seeded, reproducible) data — used for offline demos, tests, and CI, so committed samples/reports show the *machinery*, not the market, and carry no investment meaning. Point any engine at real prices with `--source yfinance`; the plain-English guide above interprets one such **live** run.
+
 ## Projects
 
 | # | Project | Scope | Status |

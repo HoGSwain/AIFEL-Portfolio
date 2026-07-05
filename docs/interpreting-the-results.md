@@ -6,6 +6,8 @@
 
 **Data:** live Yahoo Finance prices · **Window:** Jan 2023 – Jul 2026 (~3.5 years) · **Looked at:** Apple, Microsoft, Google, and an S&P 500 fund (SPY).
 
+> 🧪 **Live data vs. synthetic data — read this before trusting any number.** The AIFEL engines ship with two data sources. Their **default is *synthetic*** — a seeded, reproducible simulation used for offline demos, tests, and continuous integration, so a run always gives the same output. Those synthetic numbers demonstrate the **machinery**; they carry **no market meaning** and must never be read as investment signal. **Everything in *this* guide comes from the *live* source instead** — real Yahoo Finance prices (`--source yfinance`) — which is what makes it safe to interpret. Anywhere else in the portfolio (sample files, notebook charts, CI reports), assume results are **synthetic** unless a data-source line explicitly says "live".
+
 > There is also an interactive, visual version of this guide. *(Ask the portfolio owner for the shared link.)*
 
 ---
