@@ -18,7 +18,7 @@ construction, risk, fixed income, options, and credit.
 | 2 | [**Portfolio Analytics Engine**](https://github.com/HoGSwain/portfolio-analytics-engine) | Returns, volatility, Sharpe, Sortino, max drawdown, beta, and alpha for one or more tickers — built on Project 1 as a real dependency. | ✅ **Live** · [![CI](https://github.com/HoGSwain/portfolio-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/portfolio-analytics-engine/actions/workflows/ci.yml) |
 | 3 | [**Portfolio Optimization Engine**](https://github.com/HoGSwain/portfolio-optimization-engine) | Minimum-variance and maximum-Sharpe (tangency) portfolios and the efficient frontier (mean-variance / Markowitz) — built on Projects 1–2. | ✅ **Live** · [![CI](https://github.com/HoGSwain/portfolio-optimization-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/portfolio-optimization-engine/actions/workflows/ci.yml) |
 | 4 | [**Risk Analytics Engine**](https://github.com/HoGSwain/risk-analytics-engine) | Value-at-Risk (historical & parametric), Expected Shortfall (CVaR), and stress losses for assets and portfolios — built on Projects 1–2. | ✅ **Live** · [![CI](https://github.com/HoGSwain/risk-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/risk-analytics-engine/actions/workflows/ci.yml) |
-| 5 | Bond Analytics | Pricing, yield, duration, and convexity for fixed-income instruments. | 🔜 Planned |
+| 5 | [**Bond Analytics Engine**](https://github.com/HoGSwain/bond-analytics-engine) | Bond pricing (price↔yield), duration, convexity, DV01, and a spot yield curve. **Standalone** — the fixed-income primitive. | ✅ **Live** · [![CI](https://github.com/HoGSwain/bond-analytics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/HoGSwain/bond-analytics-engine/actions/workflows/ci.yml) |
 | 6 | Option Pricing | Black–Scholes and numerical (binomial / Monte-Carlo) pricing and Greeks. | 🔜 Planned |
 | 7 | Credit Risk | Default probability, credit scoring, and credit-portfolio risk modeling. | 🔜 Planned |
 
@@ -64,6 +64,17 @@ risk-measurement layer.
 - Value-at-Risk (historical & parametric Gaussian), Expected Shortfall (CVaR), and stress (worst 1-day / k-day loss); per-asset and portfolio, with dollar figures
 - Deterministic decision-level explanation ("at 95% confidence the one-day loss is not expected to exceed X% ($Y)") with explicit limitations
 - Python library **and** Typer CLI; 29 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
+
+## Project 5: Bond Analytics Engine
+
+The portfolio's **fixed-income** primitive. Unlike Projects 2–4, a bond's price
+and risk are analytic in its cash flows (not equity returns), so the **Bond
+Analytics Engine (`bae`)** is deliberately **standalone** — no AIFEL git
+dependency. Knowing when *not* to couple is itself an engineering decision.
+
+- Pricing (price↔yield via Brent), Macaulay & modified duration, convexity, DV01, and a duration+convexity yield-shock scenario vs full reprice
+- A synthetic spot yield curve; every measure validated against a finite-difference oracle (independent of the analytic formulas)
+- Python library **and** Typer CLI; 36 passing `pytest` tests, run in CI on Linux + Windows × Python 3.10 & 3.12
 
 ## Explainability & Governance
 
